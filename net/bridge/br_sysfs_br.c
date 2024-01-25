@@ -737,7 +737,6 @@ static ssize_t nf_call_arptables_store(
 }
 static DEVICE_ATTR_RW(nf_call_arptables);
 #endif
-#ifdef CONFIG_BRIDGE_VLAN_FILTERING
 static ssize_t vlan_filtering_show(struct device *d,
 				   struct device_attribute *attr,
 				   char *buf)
@@ -801,7 +800,6 @@ static ssize_t vlan_stats_enabled_store(struct device *d,
 	return store_bridge_parm(d, buf, len, br_vlan_set_stats);
 }
 static DEVICE_ATTR_RW(vlan_stats_enabled);
-#endif
 
 static struct attribute *bridge_attrs[] = {
 	&dev_attr_forward_delay.attr,
@@ -849,12 +847,10 @@ static struct attribute *bridge_attrs[] = {
 	&dev_attr_nf_call_ip6tables.attr,
 	&dev_attr_nf_call_arptables.attr,
 #endif
-#ifdef CONFIG_BRIDGE_VLAN_FILTERING
 	&dev_attr_vlan_filtering.attr,
 	&dev_attr_vlan_protocol.attr,
 	&dev_attr_default_pvid.attr,
 	&dev_attr_vlan_stats_enabled.attr,
-#endif
 	NULL
 };
 

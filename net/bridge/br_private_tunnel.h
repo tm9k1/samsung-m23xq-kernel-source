@@ -32,7 +32,6 @@ int br_get_vlan_tunnel_info_size(struct net_bridge_vlan_group *vg);
 int br_fill_vlan_tunnel_info(struct sk_buff *skb,
 			     struct net_bridge_vlan_group *vg);
 
-#ifdef CONFIG_BRIDGE_VLAN_FILTERING
 /* br_vlan_tunnel.c */
 int vlan_tunnel_init(struct net_bridge_vlan_group *vg);
 void vlan_tunnel_deinit(struct net_bridge_vlan_group *vg);
@@ -46,39 +45,5 @@ int br_handle_ingress_vlan_tunnel(struct sk_buff *skb,
 				  struct net_bridge_vlan_group *vg);
 int br_handle_egress_vlan_tunnel(struct sk_buff *skb,
 				 struct net_bridge_vlan *vlan);
-#else
-static inline int vlan_tunnel_init(struct net_bridge_vlan_group *vg)
-{
-	return 0;
-}
-
-static inline int nbp_vlan_tunnel_info_delete(struct net_bridge_port *port,
-					      u16 vid)
-{
-	return 0;
-}
-
-static inline int nbp_vlan_tunnel_info_add(struct net_bridge_port *port,
-					   u16 vid, u32 tun_id)
-{
-	return 0;
-}
-
-static inline void nbp_vlan_tunnel_info_flush(struct net_bridge_port *port)
-{
-}
-
-static inline void vlan_tunnel_info_del(struct net_bridge_vlan_group *vg,
-					struct net_bridge_vlan *vlan)
-{
-}
-
-static inline int br_handle_ingress_vlan_tunnel(struct sk_buff *skb,
-						struct net_bridge_port *p,
-						struct net_bridge_vlan_group *vg)
-{
-	return 0;
-}
-#endif
 
 #endif
