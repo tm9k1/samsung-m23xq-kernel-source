@@ -3632,20 +3632,10 @@ static inline int __btrfs_fs_compat_ro(struct btrfs_fs_info *fs_info, u64 flag)
 }
 
 /* acl.c */
-#ifdef CONFIG_BTRFS_FS_POSIX_ACL
 struct posix_acl *btrfs_get_acl(struct inode *inode, int type);
 int btrfs_set_acl(struct inode *inode, struct posix_acl *acl, int type);
 int btrfs_init_acl(struct btrfs_trans_handle *trans,
 		   struct inode *inode, struct inode *dir);
-#else
-#define btrfs_get_acl NULL
-#define btrfs_set_acl NULL
-static inline int btrfs_init_acl(struct btrfs_trans_handle *trans,
-				 struct inode *inode, struct inode *dir)
-{
-	return 0;
-}
-#endif
 
 /* relocation.c */
 int btrfs_relocate_block_group(struct btrfs_fs_info *fs_info, u64 group_start);

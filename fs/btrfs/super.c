@@ -650,14 +650,8 @@ int btrfs_parse_options(struct btrfs_fs_info *info, char *options,
 				"option alloc_start is obsolete, ignored");
 			break;
 		case Opt_acl:
-#ifdef CONFIG_BTRFS_FS_POSIX_ACL
 			info->sb->s_flags |= SB_POSIXACL;
 			break;
-#else
-			btrfs_err(info, "support for ACL not compiled in!");
-			ret = -EINVAL;
-			goto out;
-#endif
 		case Opt_noacl:
 			info->sb->s_flags &= ~SB_POSIXACL;
 			break;
@@ -1194,9 +1188,7 @@ static int btrfs_fill_super(struct super_block *sb,
 	sb->s_export_op = &btrfs_export_ops;
 	sb->s_xattr = btrfs_xattr_handlers;
 	sb->s_time_gran = 1;
-#ifdef CONFIG_BTRFS_FS_POSIX_ACL
 	sb->s_flags |= SB_POSIXACL;
-#endif
 	sb->s_flags |= SB_I_VERSION;
 	sb->s_iflags |= SB_I_CGROUPWB;
 
