@@ -1,0 +1,15 @@
+version: "3.6"
+services:
+  kontainer:
+    build: .
+    container_name: "kontainer"
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=Asia/Kolkata
+    volumes:
+      - /etc/passwd:/etc/passwd
+      - /etc/group:/etc/group
+      - /home/tm9k1:/home/tm9k1
+      - /run/media/tm9k1:/run/media/tm9k1
+    restart: unless-stopped
